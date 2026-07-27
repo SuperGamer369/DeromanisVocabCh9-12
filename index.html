@@ -139,6 +139,12 @@
           definitions: line.slice(i + 1).split(',').map(d => normalize(d))
         };
       });
+
+      // NEW: Update the answers box immediately if it is currently visible
+      const answersBox = document.getElementById('allAnswers');
+      if (!answersBox.classList.contains('hidden')) {
+        answersBox.innerHTML = chapters[chapter].join('<br>');
+      }
     }
 
     function showAllAnswers() {
@@ -160,7 +166,10 @@
       document.getElementById('score').textContent = 'Score: 0 / 0';
       document.getElementById('setup').classList.add('hidden');
       document.getElementById('quiz').classList.remove('hidden');
-      document.getElementById('allAnswers').classList.add('hidden');
+      
+      // Ensures the answers are hidden when the test starts
+      document.getElementById('allAnswers').classList.add('hidden'); 
+      
       nextWord();
     }
 
